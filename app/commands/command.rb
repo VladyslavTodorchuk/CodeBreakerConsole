@@ -2,8 +2,8 @@
 
 module Command
   class Command
-    def execute(command)
-      command&.execute
+    def execute
+      puts 'Run'
     end
   end
 end
