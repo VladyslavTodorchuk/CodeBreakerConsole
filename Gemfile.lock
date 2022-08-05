@@ -1,3 +1,10 @@
+GIT
+  remote: git@github.com:VladyslavTodorchuk/CodeBreaker.git
+  revision: 4bb79d43f55cb869d9a68d333100ff7f027f9465
+  branch: development
+  specs:
+    codebreaker (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -30,13 +37,16 @@ GEM
       sexp_processor (~> 4.16)
     sexp_processor (4.16.1)
     unicode-display_width (2.2.0)
+    yaml (0.2.0)
 
 PLATFORMS
   x86_64-darwin-21
 
 DEPENDENCIES
+  codebreaker!
   fasterer (~> 0.10.0)
   rubocop (~> 1.32)
+  yaml (~> 0.2.0)
 
 RUBY VERSION
    ruby 3.1.2p20
