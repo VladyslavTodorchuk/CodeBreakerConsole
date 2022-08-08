@@ -27,7 +27,7 @@ loop do
     table.add_user(user, code_breaker) unless code_breaker.nil?
   when 'rules' then executor.run(Command::RulesCommand.new)
 
-  when 'stars' then executor.run(Command::StarsCommand.new(table.rating))
+  when 'stars' then executor.run(Command::StarsCommand.new(table))
 
   when 'exit'
     executor.run(Command::SaveCommand.new(table))
