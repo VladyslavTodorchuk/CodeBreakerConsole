@@ -4,40 +4,40 @@ require 'codebreaker'
 
 module Command
   class StartCommand
-    attr_reader :name
+    attr_reader :user, :game
 
-    def initialize(name)
-      @name = name
+    def initialize(user)
+      @user = user
     end
 
     def execute
+      @code_breaker = CodeBreaker::CodeBreakerGame.new @user.name, enter_difficulty
       start_game
     end
 
     private
 
     def start_game
-      is_over = false
-      game = CodeBreaker::CodeBreakerGame.new @name, enter_difficulty
-      until is_over
-        begin
-          command = enter_command
-          case command
-          when :guess then is_over == true if guess_process game
+      loop do
+        command = enter_command
+        return @code_breaker.game if case_command(command, @code_breaker)
+      rescue CodeBreaker::NoCommandError, CodeBreaker::ValidatorError,
+             CodeBreaker::NoHintsLeftError => e
+        puts e
+      rescue CodeBreaker::NoAttemptsLeftError => e
+        puts e
+        return nil
+      end
+    end
 
-          when :hint then puts hint_process game
+    def case_command(command, game)
+      case command
+      when :guess then guess_process game
 
-          end
-        rescue CodeBreaker::NoCommandError => e
-          puts e
-        rescue CodeBreaker::ValidatorError => e
-          puts e
-        rescue CodeBreaker::NoHintsLeftError => e
-          puts e
-        rescue CodeBreaker::NoAttemptsLeftError => e
-          puts e
-          is_over = true
-        end
+      when :hint then puts hint_process game
+
+      else
+        puts "!- Wrong Command (#{command})"
       end
     end
 
@@ -53,7 +53,7 @@ module Command
 
     def guess_process(game)
       print 'Enter guess '
-      user_input = gets.chop.to_i
+      user_input = gets.chop.strip.to_i
       result = game.action(:guess, user_input)
       puts "Result: #{result}"
       result == '++++'
