@@ -4,14 +4,14 @@ require 'codebreaker'
 
 module Command
   class StartCommand
-    attr_reader :user, :game
+    attr_reader :user_name, :game
 
-    def initialize(user)
-      @user = user
+    def initialize(user_name)
+      @user_name = user_name
     end
 
     def execute
-      @code_breaker = CodeBreaker::CodeBreakerGame.new @user.name, enter_difficulty
+      @code_breaker = CodeBreaker::CodeBreakerGame.new @user_name, enter_difficulty
       start_game
     end
 

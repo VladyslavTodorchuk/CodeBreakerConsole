@@ -61,22 +61,43 @@
           null,
           null,
           null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
           null
         ]
       },
-      "/Users/vladtodorchuk/Desktop/RubyGarage/Tasks/Task 3/codebreakerapp/spec/app/commands/yml_commands/load_command_spec.rb": {
+      "/Users/vladtodorchuk/Desktop/RubyGarage/Tasks/Task 3/codebreakerapp/spec/app/commands/game_commands/stars_command_spec.rb": {
         "lines": [
           null,
           null,
           1,
-          null,
-          null
-        ]
-      },
-      "/Users/vladtodorchuk/Desktop/RubyGarage/Tasks/Task 3/codebreakerapp/spec/app/commands/yml_commands/save_command_spec.rb": {
-        "lines": [
+          2,
+          2,
           null,
           1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
           null,
           null
         ]
@@ -86,11 +107,10 @@
           null,
           null,
           1,
-          null,
           null
         ]
       }
     },
-    "timestamp": 1660124308
+    "timestamp": 1660128890
   }
 }

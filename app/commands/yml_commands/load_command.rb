@@ -9,13 +9,13 @@ module Command
   class LoadCommand
     attr_accessor :yml_file
 
-    def initialize
-      @yml_file = './storage/data.yml'
+    def initialize(yml_file)
+      @yml_file = yml_file
     end
 
     def execute
       YAML.load_file(@yml_file,
-                     permitted_classes: [Symbol, User],
+                     permitted_classes: [Table, Symbol],
                      aliases: true)
     end
   end

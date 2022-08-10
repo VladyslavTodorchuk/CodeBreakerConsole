@@ -7,9 +7,9 @@ module Command
     attr_reader :obj
     attr_accessor :yml_file
 
-    def initialize(obj)
+    def initialize(obj, yml_file)
       @obj = obj
-      @yml_file = './storage/data.yml'
+      @yml_file = yml_file
     end
 
     def execute

@@ -7,16 +7,15 @@ require_relative './commands/executor'
 require_relative './commands/yml_commands/load_command'
 require_relative './commands/yml_commands/save_command'
 require_relative 'rating/table'
-require_relative 'rating/user'
 
 executor = Command::Executor.new
-table = executor.run(Command::LoadCommand.new)
+table = executor.run(Command::LoadCommand.new('./storage/data.yml'))
 
 puts 'Welcome to CodeBreaker game'
 puts 'What is your name: '
 name = gets.chomp.strip
-user = table.rating.find { |hash| hash[:user].name == name }[:user]
-user = User.new name if user.nil?
+user = table.rating.find { |hash| hash[:user] == name }[:user]
+user = name if user.nil?
 
 loop do
   puts 'Enter commands: (start, stars, rules)'
@@ -30,7 +29,7 @@ loop do
   when 'stars' then executor.run(Command::StarsCommand.new(table))
 
   when 'exit'
-    executor.run(Command::SaveCommand.new(table))
+    executor.run(Command::SaveCommand.new(table, './storage/data.yml'))
     break
 
   else
