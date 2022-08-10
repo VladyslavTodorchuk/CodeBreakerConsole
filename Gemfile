@@ -10,6 +10,10 @@ gem 'simplecov'
 
 gem 'fasterer', '~> 0.10.0', require: false
 
+gem 'rspec', '~> 3.11'
+
 gem 'rubocop', '~> 1.32', require: false
+
+gem 'rubocop-rspec'
 
 gem 'yaml', '~> 0.2.0'

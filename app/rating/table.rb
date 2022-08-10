@@ -15,6 +15,24 @@ class Table
     } }
   end
 
+  def all_games
+    easy = sort_games(easy_games, 3)
+    medium = sort_games(medium_games, 3)
+    hell = sort_games(hell_games, 3)
+
+    print_rating(easy, medium, hell)
+  end
+
+  def print_rating(easy, medium, hell)
+    puts '--- Stars --- '
+    puts '--- Easy --- '
+    print easy
+    puts '---  Medium --- '
+    print medium
+    puts '--- Hell --- '
+    print hell
+  end
+
   def hell_games
     @rating.select { |hash| hash[:game][:difficulty] == 'hell' }
   end
@@ -34,7 +52,7 @@ class Table
     games.uniq { |u| [u[:user].name] }.first(top_rating)
   end
 
-  def print_rating(games)
+  def print(games)
     games.each do |game|
       puts "-| #{game[:user].name} || attempts: #{game[:game][:used_attempts]} hints: #{game[:game][:used_hints]}"
     end
