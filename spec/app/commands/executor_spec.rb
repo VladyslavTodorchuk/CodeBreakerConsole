@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'fileutils'
 
 RSpec.describe Command::Executor do
   let(:executor) { described_class.new }
@@ -60,10 +61,14 @@ RSpec.describe Command::Executor do
   describe '#execute' do
     context 'when data save to file the same as read' do
       before do
+        FileUtils.mkdir './tmp'
+
         @data = { user: 'Vlad', game: { used_attempts: rand(1..15), used_hints: rand(0..2), difficulty: 'easy' } }
         @table = Table.new
         @table.rating << @data
       end
+
+      after { FileUtils.remove_dir './tmp' }
 
       it do
         ex = Command::Executor.new

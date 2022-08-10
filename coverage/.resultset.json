@@ -4,6 +4,7 @@
       "/Users/vladtodorchuk/Desktop/RubyGarage/Tasks/Task 3/codebreakerapp/spec/app/commands/executor_spec.rb": {
         "lines": [
           null,
+          1,
           null,
           1,
           5,
@@ -68,13 +69,15 @@
           1,
           1,
           1,
-          null,
-          null,
-          1,
-          1,
-          1,
           1,
           null,
+          null,
+          2,
+          null,
+          1,
+          1,
+          1,
+          1,
           null,
           null,
           null,
@@ -111,6 +114,6 @@
         ]
       }
     },
-    "timestamp": 1660128890
+    "timestamp": 1660131632
   }
 }
