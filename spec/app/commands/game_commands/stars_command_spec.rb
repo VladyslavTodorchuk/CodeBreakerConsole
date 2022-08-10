@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 RSpec.describe Command::StarsCommand do
   let(:table) { instance_double('Table') }
