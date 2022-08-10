@@ -47,14 +47,14 @@ class Table
 
   def sort_games(games, top_rating = 1)
     games = games.sort_by! do |elem|
-      [elem[:game][:used_attempts], elem[:game][:used_hints], elem[:user].name]
+      [elem[:game][:used_attempts], elem[:game][:used_hints], elem[:user]]
     end
-    games.uniq { |u| [u[:user].name] }.first(top_rating)
+    games.uniq { |u| [u[:user]] }.first(top_rating)
   end
 
   def print(games)
     games.each do |game|
-      puts "-| #{game[:user].name} || attempts: #{game[:game][:used_attempts]} hints: #{game[:game][:used_hints]}"
+      puts "-| #{game[:user]} || attempts: #{game[:game][:used_attempts]} hints: #{game[:game][:used_hints]}"
     end
   end
 end

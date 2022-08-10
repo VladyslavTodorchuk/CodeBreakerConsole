@@ -2,7 +2,6 @@
 
 require 'yaml'
 require 'codebreaker'
-require_relative '../../rating/user'
 require_relative '../../rating/table'
 
 module Command
