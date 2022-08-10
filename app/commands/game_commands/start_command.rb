@@ -61,16 +61,16 @@ module Command
       result == '++++'
     end
 
-    def guess_run(input, game)
-      game.action(:guess, input)
-    end
-
     def hint_process(game)
       "Hint: #{hint_run(game)}"
     end
 
     def hint_run(game)
       game.action(:hint)
+    end
+
+    def guess_run(input, game)
+      game.action(:guess, input)
     end
   end
 end

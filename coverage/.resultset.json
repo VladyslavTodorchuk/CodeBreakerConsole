@@ -86,6 +86,25 @@
           null
         ]
       },
+      "/Users/vladtodorchuk/Desktop/RubyGarage/Tasks/Task 3/codebreakerapp/spec/app/commands/game_commands/stars_command_spec.rb": {
+        "lines": [
+          null,
+          1,
+          2,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
       "/Users/vladtodorchuk/Desktop/RubyGarage/Tasks/Task 3/codebreakerapp/spec/app/commands/game_commands/start_command_spec.rb": {
         "lines": [
           null,
@@ -221,6 +240,6 @@
         ]
       }
     },
-    "timestamp": 1660141881
+    "timestamp": 1660142273
   }
 }
