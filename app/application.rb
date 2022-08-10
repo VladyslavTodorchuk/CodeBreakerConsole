@@ -12,18 +12,24 @@ executor = Command::Executor.new
 table = executor.run(Command::LoadCommand.new('./storage/data.yml'))
 
 puts 'Welcome to CodeBreaker game'
-puts 'What is your name: '
-name = gets.chomp.strip
-user = table.rating.find { |hash| hash[:user] == name }[:user]
-user = name if user.nil?
+
+loop do
+  puts 'What is your name: '
+  name = gets.chomp.strip
+  CodeBreaker::Validator.validates_name? name
+  @user = name
+  break
+rescue CodeBreaker::ValidatorError => e
+  puts e
+end
 
 loop do
   puts 'Enter commands: (start, stars, rules)'
   command = gets.chomp.strip.downcase
   case command
   when 'start'
-    code_breaker = executor.run(Command::StartCommand.new(user))
-    table.add_user(user, code_breaker) unless code_breaker.nil?
+    code_breaker = executor.run(Command::StartCommand.new(@user))
+    table.add_user(@user, code_breaker) unless code_breaker.nil?
   when 'rules' then executor.run(Command::RulesCommand.new)
 
   when 'stars' then executor.run(Command::StarsCommand.new(table))

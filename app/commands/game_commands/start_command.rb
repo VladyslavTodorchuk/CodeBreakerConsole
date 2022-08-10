@@ -4,18 +4,20 @@ require 'codebreaker'
 
 module Command
   class StartCommand
-    attr_reader :user_name, :game
+    attr_reader :user_name, :code_breaker
 
     def initialize(user_name)
       @user_name = user_name
     end
 
     def execute
-      @code_breaker = CodeBreaker::CodeBreakerGame.new @user_name, enter_difficulty
+      create_game(enter_difficulty)
       start_game
     end
 
-    private
+    def create_game(difficulty)
+      @code_breaker = CodeBreaker::CodeBreakerGame.new @user_name, difficulty
+    end
 
     def start_game
       loop do
@@ -59,8 +61,16 @@ module Command
       result == '++++'
     end
 
+    def guess_run(input, game)
+      game.action(:guess, input)
+    end
+
     def hint_process(game)
-      "Hint: #{game.action(:hint)}"
+      "Hint: #{hint_run(game)}"
+    end
+
+    def hint_run(game)
+      game.action(:hint)
     end
   end
 end
