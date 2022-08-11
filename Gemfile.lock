@@ -1,6 +1,6 @@
 GIT
   remote: git@github.com:VladyslavTodorchuk/CodeBreaker.git
-  revision: ec19c0020b7f9cf65f3f74733778a00e4ad036ec
+  revision: 0fe29646b764331e81420e17019035fee1ab7899
   branch: development
   specs:
     codebreaker (0.1.0)
