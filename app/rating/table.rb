@@ -8,7 +8,7 @@ class Table
   end
 
   def add_user(user_obj, game)
-    @rating << { user: user_obj, game: {
+    rating << { user: user_obj, game: {
       used_attempts: game.used_attempts,
       used_hints: game.used_hints,
       difficulty: game.difficulty
@@ -34,15 +34,15 @@ class Table
   end
 
   def hell_games
-    @rating.select { |hash| hash[:game][:difficulty] == 'hell' }
+    rating.select { |hash| hash[:game][:difficulty] == 'hell' }
   end
 
   def medium_games
-    @rating.select { |hash| hash[:game][:difficulty] == 'medium' }
+    rating.select { |hash| hash[:game][:difficulty] == 'medium' }
   end
 
   def easy_games
-    @rating.select { |hash| hash[:game][:difficulty] == 'easy' }
+    rating.select { |hash| hash[:game][:difficulty] == 'easy' }
   end
 
   def sort_games(games, top_rating = 1)
