@@ -35,9 +35,7 @@ module Command
     def case_command(command, game)
       case command
       when :guess then guess_process game
-
       when :hint then puts hint_process game
-
       else
         puts "!- Wrong Command (#{command})"
       end
