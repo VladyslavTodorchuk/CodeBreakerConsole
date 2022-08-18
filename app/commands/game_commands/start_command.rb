@@ -16,13 +16,13 @@ module Command
     end
 
     def create_game(difficulty)
-      @code_breaker = CodeBreaker::CodeBreakerGame.new @user_name, difficulty
+      @code_breaker = CodeBreaker::CodeBreakerGame.new user_name, difficulty
     end
 
     def start_game
       loop do
         command = enter_command
-        return @code_breaker.game if case_command(command, @code_breaker)
+        return code_breaker.game if case_command(command, code_breaker)
       rescue CodeBreaker::NoCommandError, CodeBreaker::ValidatorError,
              CodeBreaker::NoHintsLeftError => e
         puts e
