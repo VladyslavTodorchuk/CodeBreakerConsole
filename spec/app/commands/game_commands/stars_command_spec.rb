@@ -9,7 +9,7 @@ RSpec.describe Command::StarsCommand do
       described_class.new(table).execute
     end
 
-    it do
+    it 'runs all_game command' do
       expect(table).to have_received(:all_games)
     end
   end

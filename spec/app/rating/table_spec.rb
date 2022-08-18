@@ -1,33 +1,39 @@
 # frozen_string_literal: true
 
 RSpec.describe Table do
-  RSpec.shared_examples 'grouping' do
+  shared_examples 'grouping' do
     it 'group by difficulties' do
       expect(code).to match_array(result)
     end
   end
 
   let(:table) { described_class.new }
-  let(:data) { { user: 'Vlad', game: { used_attempts: rand(1..14), used_hints: rand(0..2), difficulty: 'easy' } } }
-  after { table.rating = [] }
-
-  describe '#add_user' do
-    it 'add user game to rating array' do
-      table.rating << data
-      expect(table.rating).to match_array([data])
-    end
+  let(:rating_hell) do
+    [{ user: 'Vlad', game: { used_attempts: 4, used_hints: 1, difficulty: 'hell' } },
+     { user: 'Zack', game: { used_attempts: 4, used_hints: 2, difficulty: 'hell' } },
+     { user: 'Karl', game: { used_attempts: 9, used_hints: 0, difficulty: 'hell' } }]
   end
+  let(:rating_medium) do
+    [{ user: 'Vlad', game: { used_attempts: 4, used_hints: 1, difficulty: 'medium' } },
+     { user: 'Zack', game: { used_attempts: 4, used_hints: 2, difficulty: 'medium' } },
+     { user: 'Karl', game: { used_attempts: 9, used_hints: 0, difficulty: 'medium' } }]
+  end
+  let(:rating_easy) do
+    [{ user: 'Vlad', game: { used_attempts: 4, used_hints: 1, difficulty: 'easy' } },
+     { user: 'Zack', game: { used_attempts: 4, used_hints: 2, difficulty: 'easy' } },
+     { user: 'Karl', game: { used_attempts: 9, used_hints: 0, difficulty: 'easy' } }]
+  end
+
+  after { table.rating = [] }
 
   describe '#hell_games' do
     before do
-      @hell_game = { user: 'Vlad', game: { used_attempts: rand(1..4), used_hints: rand(0..1), difficulty: 'hell' } }
-      table.rating << @hell_game
-      table.rating << data
+      table.rating = rating_hell + rating_easy
     end
 
     context 'when hell_games return right array' do
       let(:code) { table.hell_games }
-      let(:result) { [@hell_game] }
+      let(:result) { rating_hell }
 
       include_examples 'grouping'
     end
@@ -35,14 +41,12 @@ RSpec.describe Table do
 
   describe '#medium_games' do
     before do
-      @medium_game = { user: 'Vlad', game: { used_attempts: rand(1..9), used_hints: rand(0..2), difficulty: 'medium' } }
-      table.rating << @medium_game
-      table.rating << data
+      table.rating = rating_medium + rating_easy
     end
 
     context 'when hell_games return right array' do
       let(:code) { table.medium_games }
-      let(:result) { [@medium_game] }
+      let(:result) { rating_medium }
 
       include_examples 'grouping'
     end
@@ -50,14 +54,12 @@ RSpec.describe Table do
 
   describe '#easy_games' do
     before do
-      @medium_game = { user: 'Vlad', game: { used_attempts: rand(1..9), used_hints: rand(0..2), difficulty: 'medium' } }
-      table.rating << @medium_game
-      table.rating << data
+      table.rating = rating_easy + rating_medium
     end
 
     context 'when hell_games return right array' do
       let(:code) { table.easy_games }
-      let(:result) { [data] }
+      let(:result) { rating_easy }
 
       include_examples 'grouping'
     end
@@ -65,19 +67,11 @@ RSpec.describe Table do
 
   describe '#sort_games' do
     before do
-      @result = [
-        { user: 'Vlad', game: { used_attempts: 4, used_hints: 1, difficulty: 'medium' } },
-        { user: 'Zack', game: { used_attempts: 4, used_hints: 2, difficulty: 'medium' } },
-        { user: 'Karl', game: { used_attempts: 9, used_hints: 0, difficulty: 'medium' } }
-      ]
-      table.rating << @result[2]
-      table.rating << @result[0]
-      table.rating << @result[1]
-      table.rating << data
+      table.rating = rating_medium
     end
 
-    it 'sort array of game bu attempts, hint and name ' do
-      expect(table.sort_games(table.medium_games, 3)).to match_array(@result)
+    it 'sort array of game attempts, hint and name ' do
+      expect(table.sort_games(table.medium_games, 3)).to match_array(rating_medium)
     end
   end
 end

@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe Command::StartCommand do
-  let(:command) { described_class.new 'Vlad' }
+  let(:command) { described_class.new('Vlad') }
+  let(:game) { instance_double('game') }
 
   before { command.create_game('easy') }
 
@@ -17,10 +18,11 @@ RSpec.describe Command::StartCommand do
     end
 
     it 'run :guess command raise NoAttemptsLeftError ' do
-      command.code_breaker.game.total_attempts = 0
+      allow(game).to receive(:action).with(:guess, 1234).and_raise(CodeBreaker::NoAttemptsLeftError,
+                                                                                    'You have no attempts left')
       expect do
         command.guess_run(1234,
-                          command.code_breaker)
+                          game)
       end.to raise_error(CodeBreaker::NoAttemptsLeftError, 'You have no attempts left')
     end
   end
@@ -31,9 +33,9 @@ RSpec.describe Command::StartCommand do
     end
 
     it 'run :hint command raise NoHintsLeftError ' do
-      command.code_breaker.game.total_hints = 0
+      allow(game).to receive(:action).with(:hint).and_raise(CodeBreaker::NoHintsLeftError, 'You have no hints left')
       expect do
-        command.hint_run(command.code_breaker)
+        command.hint_run(game)
       end.to raise_error(CodeBreaker::NoHintsLeftError, 'You have no hints left')
     end
   end
