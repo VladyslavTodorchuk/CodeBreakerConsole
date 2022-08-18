@@ -16,11 +16,10 @@ class Table
   end
 
   def all_games
-    easy = sort_games(easy_games, 3)
-    medium = sort_games(medium_games, 3)
-    hell = sort_games(hell_games, 3)
+    games_hash = { easy: easy_games, medium: medium_games, hell: hell_games }
+    game_hash = sort_games(games_hash, 3)
 
-    print_rating(easy, medium, hell)
+    print_rating(game_hash[:easy], game_hash[:medium], game_hash[:hell])
   end
 
   def print_rating(easy, medium, hell)
@@ -45,11 +44,14 @@ class Table
     rating.select { |hash| hash[:game][:difficulty] == 'easy' }
   end
 
-  def sort_games(games, top_rating = 1)
-    games = games.sort_by! do |elem|
-      [elem[:game][:used_attempts], elem[:game][:used_hints], elem[:user]]
+  def sort_games(games_hash, top_rating = 1)
+    games_hash.each do |difficulty, games|
+      sorted_games = games.sort_by! do |elem|
+        [elem[:game][:used_attempts], elem[:game][:used_hints], elem[:user]]
+      end
+      games_hash[difficulty] = sorted_games.uniq { |u| [u[:user]] }.first(top_rating)
     end
-    games.uniq { |u| [u[:user]] }.first(top_rating)
+    games_hash
   end
 
   def print(games)

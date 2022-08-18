@@ -14,6 +14,11 @@ RSpec.describe Table do
      { user: 'Karl', game: { used_attempts: 9, used_hints: 0, difficulty: 'hell' } }]
   end
   let(:rating_medium) do
+    [{ user: 'Zack', game: { used_attempts: 4, used_hints: 2, difficulty: 'medium' } },
+     { user: 'Vlad', game: { used_attempts: 4, used_hints: 1, difficulty: 'medium' } },
+     { user: 'Karl', game: { used_attempts: 9, used_hints: 0, difficulty: 'medium' } }]
+  end
+  let(:rating_medium_sorted) do
     [{ user: 'Vlad', game: { used_attempts: 4, used_hints: 1, difficulty: 'medium' } },
      { user: 'Zack', game: { used_attempts: 4, used_hints: 2, difficulty: 'medium' } },
      { user: 'Karl', game: { used_attempts: 9, used_hints: 0, difficulty: 'medium' } }]
@@ -71,7 +76,7 @@ RSpec.describe Table do
     end
 
     it 'sort array of game attempts, hint and name ' do
-      expect(table.sort_games(table.medium_games, 3)).to match_array(rating_medium)
+      expect(table.sort_games({ medium: table.medium_games }, 3)[:medium]).to match_array(rating_medium_sorted)
     end
   end
 end

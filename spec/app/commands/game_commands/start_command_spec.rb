@@ -19,7 +19,7 @@ RSpec.describe Command::StartCommand do
 
     it 'run :guess command raise NoAttemptsLeftError ' do
       allow(game).to receive(:action).with(:guess, 1234).and_raise(CodeBreaker::NoAttemptsLeftError,
-                                                                                    'You have no attempts left')
+                                                                   'You have no attempts left')
       expect do
         command.guess_run(1234,
                           game)

@@ -4,57 +4,41 @@ require 'fileutils'
 
 RSpec.describe Command::Executor do
   let(:executor) { described_class.new }
-
-  let(:rules_command) { instance_double('Command::RulesCommand') }
-  let(:stars_command) { instance_double('Command::StarsCommand') }
-  let(:start_command) { instance_double('Command::StartCommand') }
+  let(:command) { instance_double('Command::Command') }
 
   describe '#execute' do
     context 'when executor runs rules_command method execute' do
       before do
-        allow(Command::RulesCommand).to receive(:new) { rules_command }
-        allow(rules_command).to receive(:execute)
+        allow(Command::RulesCommand).to receive(:new) { command }
+        allow(command).to receive(:execute)
       end
-
-      it do
-        executor.run(rules_command)
-        expect(rules_command).to have_received(:execute)
+      it 'runs commands' do
+        executor.run(Command::RulesCommand.new)
+        expect(command).to have_received(:execute)
       end
     end
 
     context 'when executor runs stars_command method execute' do
       before do
-        allow(Command::StarsCommand).to receive(:new) { stars_command }
-        allow(stars_command).to receive(:execute)
+        allow(Command::StarsCommand).to receive(:new).with([]) { command }
+        allow(command).to receive(:execute)
       end
 
       it do
-        executor.run(stars_command)
-        expect(stars_command).to have_received(:execute)
+        executor.run(Command::StarsCommand.new([]))
+        expect(command).to have_received(:execute)
       end
     end
 
     context 'when executor runs start_command method execute' do
       before do
-        allow(Command::StartCommand).to receive(:new) { start_command }
-        allow(start_command).to receive(:execute)
+        allow(Command::StartCommand).to receive(:new).with('Vlad') { command }
+        allow(command).to receive(:execute)
       end
 
       it do
-        executor.run(start_command)
-        expect(start_command).to have_received(:execute)
-      end
-    end
-
-    context 'when executor runs start_command method execute' do
-      before do
-        allow(Command::StartCommand).to receive(:new) { start_command }
-        allow(start_command).to receive(:execute)
-      end
-
-      it do
-        executor.run(start_command)
-        expect(start_command).to have_received(:execute)
+        executor.run(Command::StartCommand.new('Vlad'))
+        expect(command).to have_received(:execute)
       end
     end
   end
