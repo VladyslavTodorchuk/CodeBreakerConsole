@@ -13,15 +13,10 @@ table = executor.run(Command::LoadCommand.new('./storage/data.yml'))
 
 puts 'Welcome to CodeBreaker game'
 
-loop do
-  puts 'What is your name: '
-  name = gets.chomp.strip
-  CodeBreaker::Validator.validates_name? name
-  @user = name
-  break
-rescue CodeBreaker::ValidatorError => e
-  puts e
-end
+puts 'What is your name: '
+name = gets.chomp.strip
+
+@user = name
 
 loop do
   puts 'Enter commands: (start, stars, rules)'
@@ -31,13 +26,10 @@ loop do
     code_breaker = executor.run(Command::StartCommand.new(@user))
     table.add_user(@user, code_breaker) unless code_breaker.nil?
   when 'rules' then executor.run(Command::RulesCommand.new)
-
   when 'stars' then executor.run(Command::StarsCommand.new(table))
-
   when 'exit'
     executor.run(Command::SaveCommand.new(table, './storage/data.yml'))
     break
-
   else
     puts '!- Wrong commands'
   end
