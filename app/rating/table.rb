@@ -35,7 +35,8 @@ class Table
     games_hash.each do |difficulty, games|
       puts difficulty
       games.each do |game|
-        puts "#{game[:user]}  used_attempts : | #{game[:game][:used_attempts]} | used_hints : | #{game[:game][:used_hints]} |"
+        puts "#{game[:user]}  used_attempts : | #{game[:game][:used_attempts]} " \
+             "| used_hints : | #{game[:game][:used_hints]} |"
       end
     end
   end
