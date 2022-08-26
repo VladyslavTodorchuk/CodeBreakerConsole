@@ -42,7 +42,7 @@ module Command
     end
 
     def enter_difficulty
-      print 'Pick difficulty (easy, medium, hell) '
+      print "Pick difficulty (#{CodeBreaker::Constants::DIFFICULTY_HASH.keys})"
       gets.chop.strip
     end
 
